@@ -74,7 +74,6 @@ class SmsController < ApplicationController
   end
 
   def message
-    render :message, format: :xml
   end
 
   private
