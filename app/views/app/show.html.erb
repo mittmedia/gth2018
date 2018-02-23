@@ -1,2 +1,14 @@
-<h1>App#show</h1>
-<p>Find me in app/views/app/show.html.erb</p>
+<%= javascript_pack_tag 'application' %>
+
+<h1>Heat Valley</h1>
+<div id="floating-panel">
+  <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+  <button onclick="changeGradient()">Change gradient</button>
+  <button onclick="changeRadius()">Change radius</button>
+  <button onclick="changeOpacity()">Change opacity</button>
+</div>
+<div id="map"></div>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ-kTAsWbvk5H38dlo4ZAomf15SFC5hxI&libraries=visualization&callback=initMap">
+</script>
