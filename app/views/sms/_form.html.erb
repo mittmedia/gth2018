@@ -1,5 +1,5 @@
 <%= form_with(model: sm, local: true) do |form| %>
-  <% if sm.errors.any? %>
+  <!-- <% if sm.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(sm.errors.count, "error") %> prohibited this sm from being saved:</h2>
 
@@ -9,14 +9,44 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %> -->
 
   <div class="field">
-    <%= form.label :form %>
-    <%= form.text_field :form, id: :sm_form %>
+    <h1>Send a SMS</h1>
+    <fieldset>
+      <legend>From Hater:</legend>
+      <% @contacts.each_with_index do |contact, index| %>
+        <p>
+          <%= radio_button_tag(:from, index) %>
+          <%= label_tag("from_#{index}".to_sym, contact[:who]) %>
+        </p>
+      <% end %>
+    </fieldset>
+
+    <fieldset>
+      <legend>To Victim:</legend>
+      <% @contacts.each_with_index do |contact, index| %>
+        <p>
+          <%= radio_button_tag(:to, index) %>
+          <%= label_tag("to_#{index}".to_sym, contact[:who]) %>
+        </p>
+      <% end %>
+    </fieldset>
+
+    <fieldset>
+      <legend>Message:</legend>
+      <%= form.text_area(:message, placeholder: 'Write a message', class: 'message_field') %>
+      <h3>Or choose a prefilled message</h3>
+      <% @messages.each_with_index do |message, index| %>
+        <p>
+          <%= radio_button_tag(:message, index) %>
+          <%= label_tag("message_#{index}".to_sym, message[:name]) %>
+        </p>
+      <% end %>
+    </fieldset>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit value: 'Send SMS' %>
   </div>
 <% end %>

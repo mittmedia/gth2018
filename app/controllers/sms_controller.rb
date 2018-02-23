@@ -6,17 +6,7 @@ class SmsController < ApplicationController
   # GET /sms.json
   def index
     @sms = Sm.all
-    account_sid = 'ACbd7c80df8b420dfc748ab2ef378bef70'
-    auth_token = '960e58be377b2da52d981a06e2b2e1b5'
-    @client = Twilio::REST::Client.new(account_sid, auth_token)
 
-    @call = @client.calls.create(
-      url: 'https://gth2018.herokuapp.com/message',
-      to: '+46709529036',
-      from: '+46765193283'
-    )
-
-    puts @call.sid
   end
 
   # GET /sms/1
@@ -26,6 +16,8 @@ class SmsController < ApplicationController
 
   # GET /sms/new
   def new
+    @contacts = verified_numbers
+    @messages = tried_messages
     @sm = Sm.new
   end
 
@@ -36,8 +28,14 @@ class SmsController < ApplicationController
   # POST /sms
   # POST /sms.json
   def create
-
-
+    # @client = Twilio::REST::Client.new(account_sid, auth_token)
+    puts "to: #{verified_numbers[params[:to_id]]}"
+    puts "from: #{verified_numbers[params[:from_id]]}"
+    # @call = @client.calls.create(
+    #   url: 'https://gth2018.herokuapp.com/message',
+    #   to: '+46709529036',
+    #   from: '+46765193283'
+    # )
     respond_to do |format|
       if @sm.save
         format.html { redirect_to @sm, notice: 'Sm was successfully created.' }

@@ -37,3 +37,16 @@ html, body {
   top: 10px;
   z-index: 5;
 }
+
+input[type=radio] {
+  float: left;
+  margin-right: 2em;
+}
+
+fieldset {
+  margin-bottom: 1em;
+}
+
+.message_field {
+  width: 98%;
+}

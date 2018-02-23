@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   resources :sms
-  root 'app#show'
+  root 'sms#new'
   post '/message', to: 'sms#message'
 end
