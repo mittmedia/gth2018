@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Form:</strong>
-  <%= @sm.form %>
-</p>
+<h3>From:</h3>
+<strong><%= @sm.from %></strong>
+
+<h3>Message:</h3>
+<strong><%= @sm.message %></strong>
 
 <%= link_to 'Edit', edit_sm_path(@sm) %> |
 <%= link_to 'Back', sms_path %>

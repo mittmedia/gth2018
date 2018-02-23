@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   def verified_numbers
     [
-      { number: '+46706664253', who: 'Lars Skandevall' },
       { number: '+46709529036', who: 'Stefan Wallin' },
-      { number: '+46735284545', who: 'Pontus Ekholm' }
+      { number: '+46735284545', who: 'Pontus Ekholm' },
+      { number: '+46703188620', who: 'Jenny Vesterlund' }
     ]
   end
 

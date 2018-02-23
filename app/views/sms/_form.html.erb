@@ -12,7 +12,7 @@
   <% end %> -->
 
   <div class="field">
-    <h1>Send a SMS</h1>
+    <h1>Test algorithm against a sent SMS</h1>
     <fieldset>
       <legend>From Hater:</legend>
       <% @contacts.each_with_index do |contact, index| %>
@@ -37,10 +37,14 @@
       <legend>Message:</legend>
       <%= form.text_area(:message, placeholder: 'Write a message', class: 'message_field') %>
       <h3>Or choose a prefilled message</h3>
+      <p>
+        <%= radio_button_tag(:message_id, '-1', checked: true) %>
+        <%= label_tag("message_id_-1", 'Custom Message') %>
+      </p>
       <% @messages.each_with_index do |message, index| %>
         <p>
-          <%= radio_button_tag(:message, index) %>
-          <%= label_tag("message_#{index}".to_sym, message[:name]) %>
+          <%= radio_button_tag(:message_id, index) %>
+          <%= label_tag("message_id_#{index}".to_sym, message[:name]) %>
         </p>
       <% end %>
     </fieldset>

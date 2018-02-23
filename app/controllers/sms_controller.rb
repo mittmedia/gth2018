@@ -28,23 +28,22 @@ class SmsController < ApplicationController
   # POST /sms
   # POST /sms.json
   def create
-    # @client = Twilio::REST::Client.new(account_sid, auth_token)
-    puts "to: #{verified_numbers[params[:to_id]]}"
-    puts "from: #{verified_numbers[params[:from_id]]}"
-    # @call = @client.calls.create(
-    #   url: 'https://gth2018.herokuapp.com/message',
-    #   to: '+46709529036',
-    #   from: '+46765193283'
-    # )
-    respond_to do |format|
-      if @sm.save
-        format.html { redirect_to @sm, notice: 'Sm was successfully created.' }
-        format.json { render :show, status: :created, location: @sm }
-      else
-        format.html { render :new }
-        format.json { render json: @sm.errors, status: :unprocessable_entity }
-      end
+    puts params.to_json
+    to = verified_numbers[params[:to].to_i]
+    from = verified_numbers[params[:from].to_i]
+    message = params[:message]
+    message_choice = params[:message_id].to_i
+    if message_choice != -1
+      message = tried_messages[message_choice][:message]
     end
+    @sm = Sm.create!(to: to.to_json, from: from.to_json, message: message)
+    @client = Twilio::REST::Client.new(account_sid, auth_token)
+    @call = @client.calls.create(
+      url: 'https://gth2018.herokuapp.com/message',
+      to: to[:number],
+      from: from[:number]
+    )
+    redirect_to @sm, notice: 'Sm was successfully created.'
   end
 
   # PATCH/PUT /sms/1
