@@ -74,6 +74,7 @@ class SmsController < ApplicationController
   end
 
   def message
+    render :layout => false
   end
 
   private
