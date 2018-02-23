@@ -1,7 +1,7 @@
 class SmsController < ApplicationController
   before_action :set_sm, only: [:show, :edit, :update, :destroy]
   protect_from_forgery :except => [:message]
-  
+
   # GET /sms
   # GET /sms.json
   def index
@@ -11,7 +11,7 @@ class SmsController < ApplicationController
     @client = Twilio::REST::Client.new(account_sid, auth_token)
 
     @call = @client.calls.create(
-      url: 'http://gth2018.herokuapp.com/hater.xml',
+      url: 'https://gth2018.herokuapp.com/message',
       to: '+46709529036',
       from: '+46765193283'
     )
@@ -74,6 +74,7 @@ class SmsController < ApplicationController
   end
 
   def message
+    render :message, format: :xml
   end
 
   private
