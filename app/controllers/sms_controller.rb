@@ -47,12 +47,12 @@ class SmsController < ApplicationController
       @message = @client.messages.create(
         from: '+46765193283',
         to: from[:number],
-        body: 'En Guard has detected a threatful message from you and saved it as evidence for future police investigations. https://gth2018.herokuapp.com/no_abuse.jpg',
+        body: 'ExposeBot has detected a threatful message from you and saved it as evidence for future police investigations. https://gth2018.herokuapp.com/no_abuse.jpg',
       )
       @message = @client.messages.create(
         from: '+46765193283',
         to: to[:number],
-        body: 'En Guard has detected a threatful message to you and asked the sender to cease and desist, we have also saved this on our servers in case you want to open a police case.',
+        body: 'ExposeBot has detected a threatful message to you and asked the sender to cease and desist, we have also saved this on our servers in case you want to open a police case.',
       )
     end
     redirect_to @sm, notice: 'SMS was successfully analyzed and stored.'
