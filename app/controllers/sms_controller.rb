@@ -28,7 +28,6 @@ class SmsController < ApplicationController
   # POST /sms
   # POST /sms.json
   def create
-    puts params.to_json
     to = verified_numbers[params[:to].to_i]
     from = verified_numbers[params[:from].to_i]
     message = params[:message]
@@ -36,14 +35,23 @@ class SmsController < ApplicationController
     if message_choice != -1
       message = tried_messages[message_choice][:message]
     end
-    @sm = Sm.create!(to: to.to_json, from: from.to_json, message: message)
-    @client = Twilio::REST::Client.new(account_sid, auth_token)
-    @call = @client.calls.create(
-      url: 'https://gth2018.herokuapp.com/message',
-      to: to[:number],
-      from: from[:number]
-    )
-    redirect_to @sm, notice: 'Sm was successfully created.'
+    is_hate = hate_speach?(message)
+    @sm = Sm.create!(to: to.to_json, from: from.to_json, message: message, is_hate: is_hate)
+    if is_hate
+      @client = Twilio::REST::Client.new(account_sid, auth_token)
+    #   @call = @client.calls.create(
+    #     url: 'https://gth2018.herokuapp.com/message',
+    #     to: to[:number],
+    #     from: from[:number]
+    #   )
+      @message = @client.messages.create(
+        from: to[:number],
+        to: from[:number],
+        body: 'En Guard has detected a threatful message from you and saved it as evidence for future police investigations.',
+        media_url: 'https://gth2018.herokuapp.com/no_abuse.jpg'
+      )
+    end
+    redirect_to @sm, notice: 'SMS was successfully analyzed and stored.'
   end
 
   # PATCH/PUT /sms/1
@@ -72,6 +80,14 @@ class SmsController < ApplicationController
 
   def message
     render :layout => false
+  end
+
+  def hate_speach? (message)
+    response = HTTParty.post(
+      'http://lag8.goodtechhack.se:1337/sentence/',
+      body: {sentence: message}
+    )
+    response.parsed_response.downcase == 'true'
   end
 
   private

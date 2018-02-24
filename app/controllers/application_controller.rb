@@ -2,18 +2,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   def verified_numbers
     [
-      { number: '+46709529036', who: 'Stefan Wallin' },
-      { number: '+46735284545', who: 'Pontus Ekholm' },
-      { number: '+46703188620', who: 'Jenny Vesterlund' }
+      { number: '+46709529036', who: 'Sten' },
+      { number: '+46735284545', who: 'Fredrik' },
+      { number: '+46703188620', who: 'Anna' }
     ]
   end
 
   def tried_messages
     [
-      { name: 'Hate 1', message: 'I hate your cunt ass, I hope you get raped by 20 villagers' },
-      { name: 'Hate 2', message: 'You can sit on my big D you little whore' },
+      { name: 'Hat 1', message: 'Du ska dö en snar död din jävel' },
+      { name: 'Hat 2', message: 'Fittjävel, måtte du våldta av skäggebarn' },
       { name: 'Neutral 1', message: 'Har inte sminkat mig sedan den tiden faktiskt. Använder kanske läppglans ibland men det är allt.' },
-      { name: 'Neutral 2', message: 'Då hade jag nog svarat ”olivolja” eller något annat skit tror jag' }
+      { name: 'Neutral 2', message: 'Det var länge sen jag fick ett bra ligg!' }
     ]
   end
 

@@ -6,5 +6,11 @@
 <h3>Message:</h3>
 <strong><%= @sm.message %></strong>
 
-<%= link_to 'Edit', edit_sm_path(@sm) %> |
+<h3>Hate?:</h3>
+<% if @sm.is_hate %>
+  <h4 class="hate_true">This message is considered hate speach</h4>
+<% else %>
+  <h4 class="hate_false">This message is neutral</h4>
+<% end %>
+<hr>
 <%= link_to 'Back', sms_path %>

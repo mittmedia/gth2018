@@ -50,3 +50,24 @@ fieldset {
 .message_field {
   width: 98%;
 }
+
+.hate_true,
+.hate_false {
+  padding: 5px;
+  font-weight: bolder;
+  color: #485460;
+}
+
+h4.hate_true,
+h4.hate_false {
+  font-size: 30pt;
+  padding: 30px;
+}
+
+.hate_true {
+  background-color: lighten(#833471, 30%);
+}
+
+.hate_false {
+  background-color: lighten(#4bcffa, 30%);
+}

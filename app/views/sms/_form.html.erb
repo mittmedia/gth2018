@@ -44,7 +44,7 @@
       <% @messages.each_with_index do |message, index| %>
         <p>
           <%= radio_button_tag(:message_id, index) %>
-          <%= label_tag("message_id_#{index}".to_sym, message[:name]) %>
+          <%= label_tag("message_id_#{index}".to_sym, message[:message]) %>
         </p>
       <% end %>
     </fieldset>

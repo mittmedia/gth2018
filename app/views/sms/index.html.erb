@@ -1,20 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Sms</h1>
+<h1>SMS</h1>
 
 <table>
   <thead>
     <tr>
-      <th>From</th>
-      <th>To</th>
-      <th>Message</th>
-      <th colspan="3">Actions</th>
+      <td>From</td>
+      <td>To</td>
+      <td>Message</td>
     </tr>
   </thead>
 
   <tbody>
     <% @sms.each do |sm| %>
-      <tr>
+      <tr class="hate_<%= sm.is_hate %>">
         <td><%= sm.readble_offender %></td>
         <td><%= sm.readble_victim %></td>
         <td><%= sm.message %></td>
@@ -23,6 +22,5 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Sm', new_sm_path %>
+<hr>
+<%= link_to 'New SMS', new_sm_path %>
