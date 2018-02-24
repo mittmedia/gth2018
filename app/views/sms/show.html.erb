@@ -1,14 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h3>From:</h3>
-<strong><%= @sm.from %></strong>
+<pre class="show-hate"><%= @sm.from %></pre>
 
 <h3>Message:</h3>
-<strong><%= @sm.message %></strong>
+<pre class="show-hate"><%= @sm.message %></pre>
 
-<h3>Hate?:</h3>
 <% if @sm.is_hate %>
-  <h4 class="hate_true">This message is considered hate speach</h4>
+  <h4 class="hate_true">This message is considered hate speech</h4>
 <% else %>
   <h4 class="hate_false">This message is neutral</h4>
 <% end %>

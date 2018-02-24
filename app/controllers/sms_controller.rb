@@ -38,17 +38,21 @@ class SmsController < ApplicationController
     is_hate = hate_speach?(message)
     @sm = Sm.create!(to: to.to_json, from: from.to_json, message: message, is_hate: is_hate)
     if is_hate
+      #   @call = @client.calls.create(
+      #     url: 'https://gth2018.herokuapp.com/message',
+      #     to: to[:number],
+      #     from: from[:number]
+      #   )
       @client = Twilio::REST::Client.new(account_sid, auth_token)
-    #   @call = @client.calls.create(
-    #     url: 'https://gth2018.herokuapp.com/message',
-    #     to: to[:number],
-    #     from: from[:number]
-    #   )
       @message = @client.messages.create(
-        from: to[:number],
+        from: '+46765193283',
         to: from[:number],
-        body: 'En Guard has detected a threatful message from you and saved it as evidence for future police investigations.',
-        media_url: 'https://gth2018.herokuapp.com/no_abuse.jpg'
+        body: 'En Guard has detected a threatful message from you and saved it as evidence for future police investigations. https://gth2018.herokuapp.com/no_abuse.jpg',
+      )
+      @message = @client.messages.create(
+        from: '+46765193283',
+        to: to[:number],
+        body: 'En Guard has detected a threatful message to you and asked the sender to cease and desist, we have also saved this on our servers in case you want to open a police case.',
       )
     end
     redirect_to @sm, notice: 'SMS was successfully analyzed and stored.'

@@ -57,11 +57,13 @@ fieldset {
   font-weight: bolder;
   color: #485460;
 }
-
+pre.show-hate {
+  font-size: 16pt;
+}
 h4.hate_true,
 h4.hate_false {
-  font-size: 30pt;
-  padding: 30px;
+  font-size: 20pt;
+  padding: 20px;
 }
 
 .hate_true {
